@@ -15,9 +15,9 @@ At 3:14 AM on September 6, 2026, the Maplewood SOC monitoring system generated a
 ## Key Findings
 
 **Permission Finding:** The file's permission string is -rwxr--r--, which means the file currently has Read, Write, and Execute permissions for the owner, and Read permissions for the group and others within patient_notes.txt
-**File Type Finding:** patient_notes.txt
-**Timestamp Finding:** File changed Sep 06 03:14 AM
-**Strings Finding:** No readable content was found in patient_notes.txt; we only know the file permission string allows execution.
+**File Type Finding:** patient_notes.txt: ELF 64-bit LSB executable, x86-64, dynamically linked
+**Timestamp Finding:** Access: 2026-09-06 08:22:14, Modify: 2026-09-06 03:14:33, Change: 2026-09-06 03:14:33
+**Strings Finding:** The readable string revealed an external URL with a hidden path under/tmp that included a curl command. This requires escalation, and there are no other readings about the file's behavior without any deep analysis
 
 ---
 
@@ -35,7 +35,7 @@ At 3:14 AM on September 6, 2026, the Maplewood SOC monitoring system generated a
 
 ## Escalation Recommendation
 
-I would escalate this situation because we identified that, at the time, no authorized activity was scheduled, which is suspicious. This is especially concerning because the nurse denied placing any files on the workstation during and after her shift, which is strong evidence. Another point is that, while analyzing the document, we see the current permissions are -rwxr--r--, which means the owner made the file executable, even though it should be plain text. We confirmed that no scheduled tasks were configured to create files during overnight hours. The question for the Tier 2 Analyst is: Is the workstation fully compromised, meaning does the attacker have full control of the account, and can we view system logs to track where the suspicious file came from? 
+I would escalate this situation because we found that no authorized activity was scheduled at the time, which is suspicious. This is especially concerning because the nurse denied placing any files on the workstation during and after her shift, which is strong evidence. Another point is that, while analyzing the document, we see the current permissions are -rwxr--r--, which means the owner made the file executable, even though it should be plain text. The file's readable string includes a curl command that could pose a risk to the system, but without deeper analysis of the file's current execution, we can assume it is dangerous and must be escalated. We confirmed that no scheduled tasks were configured to create files overnight. The question for the Tier 2 Analyst is: Is the workstation fully compromised, meaning does the attacker have full control of the account because someone ran the file, and can we view system logs to track where the suspicious file came from? 
 
 ---
 *CPSC 4584 | Governors State University | Fall 2026*
