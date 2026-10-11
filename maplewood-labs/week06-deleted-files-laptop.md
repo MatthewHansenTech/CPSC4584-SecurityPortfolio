@@ -1,5 +1,3 @@
-Not Started yet
-
 # Week 6: Deleted Files on a Terminated Employee's Laptop
 **Course:** CPSC 4584 | Special Topics in Information Security
 **Date:** October 5, 2026
