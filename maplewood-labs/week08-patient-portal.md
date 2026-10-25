@@ -25,10 +25,13 @@ Patient reports of unexpected behavior on the Maplewood patient portal triggered
 
 ## Analysis Summary
 
-**Finding 1:** [State the evidence, impact, and proposed remediation direction.]
-**Finding 2:** [State the evidence, impact, and proposed remediation direction.]
-**Finding 3:** [State the evidence, impact, and proposed remediation direction.]
-**Finding 4:** [State the evidence, impact, and proposed remediation direction.]
+**Finding 1:** During authentication, the login form transmits user credentials in the URL parameters via GET /login?username=jsmith&password=Summer2026!, exposing plaintext passwords in browser history and server access logs; remediation requires converting the form submission method to POST over HTTPS 
+
+**Finding 2:** The server issues session tokens using Set-Cookie: sessionid=a3f8c2d1; Path=/ without security flags, allowing scripts to read the token (XSS risk) and permitting transmission over unencrypted connections; remediation requires adding HttpOnly, Secure, and SameSite=Strict attributes to the header.
+
+**Finding 3:** The website does not send back key security headers like Content-Security-Policy or X-Frame-Options in its responses, leaving browser defenses turned off and making the site vulnerable to script injection. The fix is to configure the server to send standard protective headers, including default-src 'self'.
+
+**Finding 4:** The site takes redirect instructions like next=https://external-site.com/collect | https://external-site.com/collect without checking if the address is safe, allowing attackers to trick logged-in users into visiting fake phishing sites. The fix is to set up a server-side rule that only allows redirects to an approved list of safe pages.
 
 ---
 
