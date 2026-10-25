@@ -47,7 +47,8 @@ Patient reports of unexpected behavior on the Maplewood patient portal triggered
 
 Incident WEB-2026-1019-001 at Maplewood Health System: highlights four critical vulnerabilities within the patient portal login workflow that have been documented and escalated.
 
-Current Findings:
+## Current Findings
+
 Finding 1 (High Severity): The login form utilizes the GET method GET /login?username=jsmith&password=Summer2026!, which exposes plaintext user credentials in server access logs, browser history, and proxy records.   
 
 Finding 2 (High Severity): The session cookie header Set-Cookie: sessionid=a3f8c2d1; Path=/ lacks both HttpOnly and Secure attributes, leaving session tokens vulnerable to Cross-Site Scripting (XSS) theft.
@@ -56,7 +57,8 @@ Finding 3 (Medium Severity): The login response completely omits standard securi
 
 Finding 4 (High Severity): Post-authentication redirection accepts external user input next=https://external-site.com/collect | https://external-site.com/collect, creating an unvalidated redirect vulnerability that can be leveraged for sophisticated phishing attacks.
 
-Next Steps:
+## Next Steps
+
 Fix Login Method: Change the login form from GET to POST so user passwords are no longer exposed in the URL.
 
 Secure Session Cookies: Add HttpOnly, Secure, and SameSite=Strict flags to session cookies to block script access and prevent unencrypted transmission.
